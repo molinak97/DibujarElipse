@@ -48,8 +48,8 @@ namespace Elipse
                 X2 = x;
                 Y2 = y;
                 CCentro(X1, Y1, X2, Y2);
+                //CPuntos(X1, Y1, X2, Y2);
                 CRadios(X1, Y1, X2, Y2);
-                CPuntos(X1, Y1, X2, Y2);
                 ElipseALN(X1, Y1, X2, Y2);
                 /*ElipseMDP(X1, Y1, X2, Y2);*/
                 p = 0;
@@ -111,7 +111,14 @@ namespace Elipse
                 }
                 else
                 {
-                    Rx = X2 - Xc;
+                    if(X1<Xc)
+                    {
+                        Rx = Xc - X1;
+                    }
+                    else
+                    {
+                        Rx = X1 - Xc;
+                    }
                 }
             }
 
@@ -122,17 +129,12 @@ namespace Elipse
             int auxY = 0;
             if (Y1 == Yc)
             {
-                MessageBox.Show("X1-"+ X1 + "Y1-"+ Y1);
-                MessageBox.Show("X2-" + X2 + "Y2-" + Y2);
                 auxX = X2;
                 auxY = Y2;
                 X2 = X1;
                 Y2 = Y1;
                 X1 = auxX;
                 Y1 = auxY;
-                MessageBox.Show("en Y");
-                MessageBox.Show("X1-" + X1 + "Y1-" + Y1);
-                MessageBox.Show("X2-" + X2 + "Y2-" + Y2);
             }
             else
             {
@@ -147,19 +149,34 @@ namespace Elipse
             double xd=2, yd=2;
             int x;
             int y;
-                for (x = 0; x <= Rx; x++)
+            int yy;
+                //for (x = 0; (x/yd)<1; x++)
+                for (x = 0; x<=Rx ; x++)
                 {
                     yd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(x, 2)) * (Math.Pow(Ry, 2)))) / Math.Pow(Rx, 2));
-                    panel1.CreateGraphics().DrawEllipse(pen, x + Xc, -(int)yd + Yc, 5, 5);
+
+                    panel1.CreateGraphics().DrawEllipse(pen, x + Xc, (int)yd + Yc, 5, 5);//(x,y)           7 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, (int)yd + Yc, 5, 5);//(-x,y)         6 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, -(int)yd + Yc, 5, 5);//(-x,-y)   3 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen, x + Xc, -(int)yd + Yc, 5, 5);//(x,-y)      2 Octante
+
                 }
+            //yy = (int)yd;
+            //xd = yy + 2;
+            /*for (y = Yc; y>=Ry; y--)
+            {
+                xd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(y, 2)) * (Math.Pow(Ry, 2)))) / Math.Pow(Ry, 2));
+                panel1.CreateGraphics().DrawEllipse(pen, (int)yd + Xc, -x + Yc, 5, 5);//(y,-x)       1 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, -y + Xc, (int)xd + Yc, 5, 5);//(-y,x)     5 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, -y + Xc, -(int)xd + Yc, 5, 5);//(-y,-x)   4 Octante  
+                panel1.CreateGraphics().DrawEllipse(pen, y + Xc, (int)xd + Yc, 5, 5);//(y,x)       8 Octante
+            }*/
             label3.Text = String.Format("{0}", sw.Elapsed.TotalMilliseconds);
         }
         private void ElipseMDP(int X1, int Y1, int X2, int Y2)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-
-
 
             label3.Text = String.Format("{0}", sw.Elapsed.TotalMilliseconds);
         }

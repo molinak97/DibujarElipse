@@ -159,14 +159,15 @@ namespace Elipse
             sw.Start();
             double p1, p2;
             int x = 0;
-            int y = Ry;
-            double rx2 = Math.Pow(Rx, 2);
-            double ry2 = Math.Pow(Ry, 2);
+            int y = Rx;
+            double rx2 = Math.Pow(Ry, 2);
+            double ry2 = Math.Pow(Rx, 2);
             p1 = ry2 - (rx2 * Ry) + (0.25 * rx2);
             while ((ry2 * x) < (rx2 * y))
             {
                 if (p1 < 0)
-                { x++;
+                {
+                    x++;
                     p1 = p1 + (2 * ry2 * x) + ry2;
                 }
                 else
@@ -175,10 +176,10 @@ namespace Elipse
                     y--;
                     p1 = p1 + (2 * ry2 * x) - (2 * rx2 * y) + ry2;
                 }
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, y + Xc, x + Yc, 5, 5);//(x,y)           7 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, -y + Xc, x + Yc, 5, 5);//(-x,y)         6 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, -y + Xc, -x + Yc, 5, 5);//(-x,-y)   3 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, y + Xc, -x + Yc, 5, 5);//(x,-y)      2 Octante
             }
             p2 = (ry2) * Math.Pow((x + 0.5), 2) + (rx2) * Math.Pow((y - 1), 2) - (rx2 * ry2);
             while (y > 0)
@@ -190,7 +191,8 @@ namespace Elipse
                 }
                 else
                 {
-                    x++; y--;
+                    x++;
+                    y--;
                     p2 = p2 + (2 * ry2 * x) - (2 * rx2 * y) + rx2;
                 }
                 panel1.CreateGraphics().DrawEllipse(pen, y + Xc, -x + Yc, 5, 5);//(y,-x)       1 Octante

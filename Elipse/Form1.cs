@@ -29,6 +29,9 @@ namespace Elipse
             InitializeComponent();
             label3.Text = "";
             label4.Text = "";
+            label6.Text = "";
+            label8.Text = "";
+            label10.Text = "";
         }
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
@@ -47,11 +50,19 @@ namespace Elipse
             {
                 X2 = x;
                 Y2 = y;
-                CCentro(X1, Y1, X2, Y2);
-                CRadios(X1, Y1, X2, Y2);
-                ElipseALN(X1, Y1, X2, Y2);
-                ElipseMDP(X1, Y1, X2, Y2);
-                p = 0;
+                if (X1 != X2 && Y1 != Y2)
+                {
+                    CCentro(X1, Y1, X2, Y2);
+                    CRadios(X1, Y1, X2, Y2);
+                    ElipseALN(X1, Y1, X2, Y2);
+                    ElipseMDP(X1, Y1, X2, Y2);
+                    p = 0;
+                }
+                else
+                {
+                    p = 1;
+                }
+                
             }
         }
         private void CCentro(int X1, int Y1, int X2, int Y2)
@@ -86,6 +97,7 @@ namespace Elipse
                     panel1.CreateGraphics().DrawEllipse(pen1, Xc, Yc, 5, 5);
                 }           
             }
+            label10.Text = "(" + Xc.ToString() + "," + Yc.ToString() + ")";
         }
         private void CRadios(int X1, int Y1, int X2, int Y2)
         {
@@ -120,12 +132,14 @@ namespace Elipse
                     }
                 }
             }
+            label6.Text = Rx.ToString();
+            label8.Text = Ry.ToString();
         }
         private void ElipseALN(int X1, int Y1, int X2, int Y2)
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            double xd=2, yd=2;
+            double xd, yd;
             int x;
             int y;
                 for (x = 0; x<Rx ; x++)
@@ -138,14 +152,14 @@ namespace Elipse
                     panel1.CreateGraphics().DrawEllipse(pen1, x + Xc, -(int)yd + Yc, 5, 5);//(x,-y)      2 Octante
 
                 }
-            for (y = 0; y <= Ry; y++)
-            {
-                xd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(y, 2)) * (Math.Pow(Rx, 2)))) / Math.Pow(Ry, 2));
-                panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
-                panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
-                panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
-                panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
-            }
+                for (y = 0; y <= Ry; y++)
+                {
+                    xd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(y, 2)) * (Math.Pow(Rx, 2)))) / Math.Pow(Ry, 2));
+                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
+                }
             label3.Text = String.Format("{0}", sw.Elapsed.TotalMilliseconds);
         }
         private void ElipseMDP(int X1, int Y1, int X2, int Y2)
@@ -200,6 +214,7 @@ namespace Elipse
         private void button1_Click(object sender, EventArgs e)
         {
             panel1.Refresh();
+            p = 0;
         }
     }
 }

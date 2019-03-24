@@ -20,9 +20,11 @@ namespace Elipse
         int Y2 = 0;
         int Xc = 0;
         int Yc = 0;
+        int Xcc = 0;
+        int Ycc = 0;
         int Rx = 0;
         int Ry = 0;
-        Pen pen = new Pen(Color.Green, 3);//ALN
+        Pen pen = new Pen(Color.Green, 3);//DDA
         Pen pen1 = new Pen(Color.Red, 3);//MDP
         public Form1()
         {
@@ -33,7 +35,6 @@ namespace Elipse
             label8.Text = "";
             label10.Text = "";
         }
-
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
             p++;
@@ -62,7 +63,6 @@ namespace Elipse
                 {
                     p = 1;
                 }
-                
             }
         }
         private void CCentro(int X1, int Y1, int X2, int Y2)
@@ -73,13 +73,11 @@ namespace Elipse
                 {
                     Xc = X2;
                     Yc = Y1;
-                    panel1.CreateGraphics().DrawEllipse(pen1,Xc,Yc, 5, 5);
                 }
                 else
                 {
                     Xc = X1;
                     Yc = Y2;
-                    panel1.CreateGraphics().DrawEllipse(pen1, Xc, Yc, 5, 5);
                 }
             }
             else
@@ -88,15 +86,15 @@ namespace Elipse
                 {
                     Xc = X1;
                     Yc = Y2;
-                    panel1.CreateGraphics().DrawEllipse(pen1, Xc, Yc, 5, 5);
                 }
                 else
                 {
                     Xc = X2;
                     Yc = Y1;
-                    panel1.CreateGraphics().DrawEllipse(pen1, Xc, Yc, 5, 5);
                 }           
             }
+            Xcc = X1;
+            Ycc = Y1;
             label10.Text = "(" + Xc.ToString() + "," + Yc.ToString() + ")";
         }
         private void CRadios(int X1, int Y1, int X2, int Y2)
@@ -146,19 +144,19 @@ namespace Elipse
                 {
                     yd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(x, 2)) * (Math.Pow(Ry, 2)))) / Math.Pow(Rx, 2));
 
-                    panel1.CreateGraphics().DrawEllipse(pen1, x + Xc, (int)yd + Yc, 5, 5);//(x,y)           7 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, -x + Xc, (int)yd + Yc, 5, 5);//(-x,y)         6 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, -x + Xc, -(int)yd + Yc, 5, 5);//(-x,-y)   3 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, x + Xc, -(int)yd + Yc, 5, 5);//(x,-y)      2 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen1, x + Xcc, (int)yd + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, -x + Xcc, (int)yd + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, -x + Xcc, -(int)yd + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, x + Xcc, -(int)yd + Ycc, 5, 5);
 
                 }
                 for (y = 0; y <= Ry; y++)
                 {
                     xd = Math.Sqrt((((Math.Pow(Rx, 2)) * (Math.Pow(Ry, 2))) - ((Math.Pow(y, 2)) * (Math.Pow(Rx, 2)))) / Math.Pow(Ry, 2));
-                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
-                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
+                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xcc, y + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xcc, y + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, -(int)xd + Xcc, -y + Ycc, 5, 5);
+                    panel1.CreateGraphics().DrawEllipse(pen1, (int)xd + Xcc, -y + Ycc, 5, 5);
                 }
             label3.Text = String.Format("{0}", sw.Elapsed.TotalMilliseconds);
         }
@@ -185,10 +183,10 @@ namespace Elipse
                     y--;
                     p1 = p1 + (2 * ry2 * x) - (2 * rx2 * y) + ry2;
                 }
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, x + Xcc, y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, -x + Xcc, y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, -x + Xcc, -y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, x + Xcc, -y + Ycc, 5, 5);
             }
             p2 = (ry2) * Math.Pow((x + 0.5), 2) + (rx2) * Math.Pow((y - 1), 2) - (rx2 * ry2);
             while (y > 0)
@@ -204,16 +202,21 @@ namespace Elipse
                     y--;
                     p2 = p2 + (2 * ry2 * x) - (2 * rx2 * y) + rx2;
                 }
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, y + Yc, 5, 5);//(x,y)           7 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, y + Yc, 5, 5);//(-x,y)         6 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, -x + Xc, -y + Yc, 5, 5);//(-x,-y)   3 Octante
-                panel1.CreateGraphics().DrawEllipse(pen, x + Xc, -y + Yc, 5, 5);//(x,-y)      2 Octante
+                panel1.CreateGraphics().DrawEllipse(pen, x + Xcc, y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, -x + Xcc, y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, -x + Xcc, -y + Ycc, 5, 5);
+                panel1.CreateGraphics().DrawEllipse(pen, x + Xcc, -y + Ycc, 5, 5);
             }
             label4.Text = String.Format("{0}", sw.Elapsed.TotalMilliseconds);
         }
         private void button1_Click(object sender, EventArgs e)
         {
             panel1.Refresh();
+            label3.Text = "";
+            label4.Text = "";
+            label6.Text = "";
+            label8.Text = "";
+            label10.Text = "";
             p = 0;
         }
     }

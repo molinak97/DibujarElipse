@@ -58,9 +58,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(529, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 36);
+            this.label1.Size = new System.Drawing.Size(77, 36);
             this.label1.TabIndex = 1;
-            this.label1.Text = "ALN";
+            this.label1.Text = "DDA";
             // 
             // label2
             // 
